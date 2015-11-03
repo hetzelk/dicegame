@@ -21,6 +21,8 @@ def rules():
     print("There are no Jacks, Queens, or Kings, just Aces and 1-10.")
     print("The highest possible you can get is 22 points (2 Aces).")
     print("")
+    print("If the opposing player loses, you get twice of what they bet.")
+    print("Continually press enter to quit.")
     print("")
 
 rules()
@@ -348,9 +350,12 @@ while continuegame == "":
             return(1)
             #print("You win.")
 
-        else:
-            return(0)
+        elif cardname1 + cardname2 < computercardname1 + computercardname2:
+            return(2)
             #print("Dealer wins.")
+
+        elif cardname1 + cardname2 == computercardname1 + computercardname2:
+            return(0)
 
 
 
@@ -375,15 +380,6 @@ while continuegame == "":
 
 
 
-
-
-
-
-
-
-
-
-
     start = input("Press Enter to start Double-Ace.")
 
 
@@ -405,32 +401,34 @@ while continuegame == "":
 
 
     def showp1winnings(betp1, betp2):
-        result = betp1 + betp2 + 100
+        result = (betp1 * 2) + betp2
         return(result)
 
     p1winnings = showp1winnings(betp1, betp2)
 
     def showp2winnings(betp1, betp2):
-        result = betp2 + betp1 + 100
+        result = betp2 + (betp1 * 2)
         return(result)
 
     p2winnings = showp2winnings(betp1, betp2)
 
 
-    def printplayerwinnings(p1winnings, p2winnings):
-        if p2winnings > p1winnings:
+    def printplayerwinnings(showwinner, p1winnings, p2winnings):
+        if showwinner == 1:
             print("")
             print(player1, ", you won $", p2winnings)
-        else:
+        elif showwinner ==2:
             print("")
             print(player2, ", you won $", p1winnings)
+        elif showwinner ==0:
+            print("You both tied!")
 
-    printplayerwinnings(p1winnings, p2winnings)
+    printplayerwinnings(showwinner, p1winnings, p2winnings)
 
     print("")
     
     restart = input("Press enter to restart.")
-    time.sleep(1.0)
+
 
 
 
