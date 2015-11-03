@@ -374,30 +374,7 @@ while continuegame == "":
     winnings = definewinner(showwinner)
 
 
-    def getstartdeposit():
-        currentbank = 1000
-        return currentbank 
 
-    currentbank = getstartdeposit()
-
-    def addtobank(winnings, currentbank):
-        result = currentbank + winnings
-        return result
-
-    addwinningstobank = addtobank(winnings, currentbank)
-
-    def betfrombank(addwinningstobank):
-        currentbank = addwinningstobank - betp1
-        result = currentbank
-        return(result)
-
-    betbank = betfrombank(addwinningstobank)
-
-#    print("******")
-#    print("get start deposit $", currentbank)
-#    print("add to bank $", addwinningstobank)
-#    print("bet from bank $", betbank)
-#    print("******")
 
 
 
@@ -427,25 +404,33 @@ while continuegame == "":
 
 
 
-    def showp1winnings():
-        result = (betp1 *2) + betp2
+    def showp1winnings(betp1, betp2):
+        result = betp1 + betp2 + 100
         return(result)
 
+    p1winnings = showp1winnings(betp1, betp2)
 
-    def showp2winnings():
-        result = (betp2 *2) + betp1
+    def showp2winnings(betp1, betp2):
+        result = betp2 + betp1 + 100
         return(result)
 
+    p2winnings = showp2winnings(betp1, betp2)
 
 
+    def printplayerwinnings(p1winnings, p2winnings):
+        if p2winnings > p1winnings:
+            print("")
+            print(player1, ", you won $", p2winnings)
+        else:
+            print("")
+            print(player2, ", you won $", p1winnings)
 
+    printplayerwinnings(p1winnings, p2winnings)
 
     print("")
-    print(printwinner(showwinner))
-
-
+    
     restart = input("Press enter to restart.")
-    #time.sleep(3.0)
+    time.sleep(1.0)
 
 
 
