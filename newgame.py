@@ -21,22 +21,25 @@ def rules():
     print("There are no Jacks, Queens, or Kings, just Aces and 1-10.")
     print("The highest possible you can get is 22 points (2 Aces).")
     print("")
-    print("You get to deposit however much money you want to start.")
     print("")
 
 rules()
 
-startbank = int(input("How much would you like to deposit? "))
+player1 = input("What is player 1's name? ")
+player2 = input("What is player 2's name? ")
 
-printbank = print("You deposited",startbank)
+#startbank = int(input("How much would you like to deposit? "))
+
+#printbank = print("You deposited",startbank)
 
 continuegame = ""
 
 while continuegame == "":
+    os.system("cls")
 
     title()
-    
-    bet = int(input("How much do you want to bet? "))
+    print(player1)
+    betp1 = int(input("How much do you want to bet? "))
 
     def card1():
         card = random.randrange(10) + 2 # Integer from 0 to 9
@@ -355,69 +358,94 @@ while continuegame == "":
         
     def definewinner(showwinner):
         if showwinner > 0:
-            winnings = bet * 2
+            winnings = betp1 * 2
             return winnings
         else:
             return 0
 
     def printwinner(showwinner):
         if showwinner > 0:
-            return("You Win!")
+            print(player1, "You Win!")
         else:
-            return("Dealer Wins.")
+            print(player2, "You Win!")
 
-    printwinner = printwinner(showwinner)
 
 
     winnings = definewinner(showwinner)
 
 
+    def getstartdeposit():
+        currentbank = 1000
+        return currentbank 
 
+    currentbank = getstartdeposit()
 
+    def addtobank(winnings, currentbank):
+        result = currentbank + winnings
+        return result
 
-    def bank():
+    addwinningstobank = addtobank(winnings, currentbank)
 
-        currentbank = startbank - bet
+    def betfrombank(addwinningstobank):
+        currentbank = addwinningstobank - betp1
         result = currentbank
         return(result)
 
-    currentbank = bank()   
-    print("Current Bank: $", currentbank)
+    betbank = betfrombank(addwinningstobank)
 
-    def winningbank(winnings, currentbank):
-        result = currentbank + winnings
-        return(result)
+#    print("******")
+#    print("get start deposit $", currentbank)
+#    print("add to bank $", addwinningstobank)
+#    print("bet from bank $", betbank)
+#    print("******")
 
 
 
 
-    #title()
+
+
+
 
 
     start = input("Press Enter to start Double-Ace.")
 
 
+    print("")
+    print(player1, "Your 1st Card:", cardnamechanger1(cardname1), "of", showsuitname1)
+    print(player1, "Your 2nd Card:", cardnamechanger2(cardname2), "of", showsuitname2)
+
+    print("")
+    print(player2, ", Would you like to bet against their hand? ")
+
+    betp2 = int(input("How much would you like to bet? (Enter 0 if nothing) "))
+
+    print("")
+    print(player2, "  Your 1st Card:", computercardnamechanger1(computercardname1), "of", showcomputersuitname1)
+    print(player2, "  Your 2nd Card:", computercardnamechanger2(computercardname2), "of", showcomputersuitname2)
+
+
+
+
+
+    def showp1winnings():
+        result = (betp1 *2) + betp2
+        return(result)
+
+
+    def showp2winnings():
+        result = (betp2 *2) + betp1
+        return(result)
+
 
 
 
 
     print("")
-    print("Your 1st Card:", cardnamechanger1(cardname1), "of", showsuitname1)
-    print("Your 2nd Card:", cardnamechanger2(cardname2), "of", showsuitname2)
-
-    print("")
-
-    print("  Dealers 1st Card:", computercardnamechanger1(computercardname1), "of", showcomputersuitname1)
-    print("  Dealers 2nd Card:", computercardnamechanger2(computercardname2), "of", showcomputersuitname2)
-
-    print("")
-    print(printwinner)
-    print("You won $",winnings)
-    print("Your current bank is $", winningbank(winnings, currentbank))
+    print(printwinner(showwinner))
 
 
-
-    time.sleep(3.0)
+    restart = input("Press enter to restart.")
+    #time.sleep(3.0)
 
 
 
